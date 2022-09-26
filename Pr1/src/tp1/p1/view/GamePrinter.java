@@ -5,34 +5,24 @@ import static tp1.utils.StringUtils.*;
 import tp1.p1.logic.Game;
 import tp1.utils.StringUtils;
 
-public class GamePrinter {
+public class GamePrinter 
+{
 
 	private static final String SPACE = " ";
-	
 	private static final String CELL_BORDER_CHAR = "─";
-
 	private static final String VERTICAL_DELIMITER = "|";
-
 	private static final String NEW_LINE = System.lineSeparator();
-
 	private static final int MARGIN_SIZE = 2;
-	
 	private static final String MARGIN = repeat(SPACE, MARGIN_SIZE);
-
 	private static final int CELL_SIZE = 8;
-
 	private static final String CELL_BORDER = repeat(CELL_BORDER_CHAR, CELL_SIZE);
-
 	private static final String ROW_BORDER = SPACE + repeat(CELL_BORDER + SPACE, Game.NUM_COLS);
-
 	private static final String IDENTED_ROW_BORDER = String.format("%n%s%s%n", MARGIN, ROW_BORDER);
 
 	private Game game;
 
 	public GamePrinter(Game game) {
 		this.game = game;
-
-
 	}
 
 	/**
@@ -42,9 +32,12 @@ public class GamePrinter {
 	 */
 	protected String getInfo() {
 		StringBuilder buffer = new StringBuilder();
-
-		// TODO fill your code
-
+		
+		// board Header
+		buffer.append(Messages.NUMBER_OF_CYCLES + " " + game.getCycles() + "\n");
+		buffer.append(Messages.NUMBER_OF_COINS + " " + this.game.getCurrentSuns() + "\n");
+		buffer.append(Messages.REMAINING_ZOMBIES + " " + this.game.getRemainingZombies() + "\n");
+		
 		return buffer.toString();
 	}
 
@@ -57,11 +50,9 @@ public class GamePrinter {
 		StringBuilder str = new StringBuilder();
 
 		// Game Status
-
 		str.append(getInfo());
 
 		// Paint game board
-
 		str.append(IDENTED_ROW_BORDER);
 
 		for (int row = 0; row < Game.NUM_ROWS; row++) {
